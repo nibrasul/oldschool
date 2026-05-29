@@ -22,23 +22,28 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/login`, {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
       
-      const data = await response.json();
-      
-      if (data.success) {
-        localStorage.setItem('adminToken', data.token);
-        navigate('/admin');
-      } else {
-        setError(data.message || 'Login failed');
+      try {
+        const data = await response.json();
+        if (data.success) {
+          localStorage.setItem('adminToken', data.token);
+          navigate('/admin');
+        } else {
+          setError(data.message || 'Login failed');
+        }
+      } catch (jsonErr) {
+        console.error('Failed to parse JSON response:', jsonErr);
+        setError('Server returned an invalid response (expected JSON). Check if the API URL is correct.');
       }
     } catch (err) {
       console.error(err);
-      setError('Unable to connect to server');
+      setError('Unable to connect to server. Please check your network or backend status.');
     }
   };
 

@@ -51,6 +51,11 @@ app.get('/api/contact/messages', (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-    console.log(`Node.js server is running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Node.js server is running on http://localhost:${PORT}`);
+    });
+}
+
+export default app;
+

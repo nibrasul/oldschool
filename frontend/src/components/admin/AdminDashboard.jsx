@@ -13,15 +13,21 @@ const AdminDashboard = () => {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact/messages`, {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/contact/messages`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
       
       if (response.ok) {
-        const data = await response.json();
-        setMessages(data);
+        try {
+          const data = await response.json();
+          setMessages(data);
+        } catch (jsonErr) {
+          console.error('Failed to parse JSON response:', jsonErr);
+          setError('Server returned an invalid response (expected JSON). Check if the API URL is correct.');
+        }
       } else {
         if (response.status === 401) {
           setError('Session expired. Please log in again.');

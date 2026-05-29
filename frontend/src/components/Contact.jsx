@@ -18,7 +18,8 @@ const Contact = () => {
     setStatus('Submitting...');
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,15 +28,20 @@ const Contact = () => {
       });
       
       if (response.ok) {
-        const data = await response.json();
-        setStatus(data.message);
-        setFormData({ name: '', email: '', phone: '', message: '' }); // clear form
+        try {
+          const data = await response.json();
+          setStatus(data.message);
+          setFormData({ name: '', email: '', phone: '', message: '' }); // clear form
+        } catch (jsonErr) {
+          console.error('Failed to parse JSON response:', jsonErr);
+          setStatus('Server returned an invalid response (expected JSON, received HTML). Check if the API URL is correct.');
+        }
       } else {
         setStatus('Failed to send message. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setStatus('Unable to connect to the server. Is the Java backend running?');
+      setStatus('Unable to connect to the server. Please check your internet connection or backend status.');
     }
   };
 
