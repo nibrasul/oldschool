@@ -13,8 +13,7 @@ const AdminDashboard = () => {
   const fetchMessages = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/contact/messages`, {
+      const response = await fetch('https://oldschool-3.onrender.com/api/contact/messages', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
