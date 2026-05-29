@@ -63,9 +63,7 @@ const Navbar = () => {
         <div className="nav-links">
           <a href="#home" className={active === 'home' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'home')}>Home</a>
           <a href="#about" className={active === 'about' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'about')}>About</a>
-          <Link to="/store" className={location.pathname === '/store' ? 'active' : ''}>Store</Link>
           <a href="#franchise" className={active === 'franchise' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'franchise')}>Franchise</a>
-          <a href="#csr" onClick={(e) => e.preventDefault()}>CSR</a>
           <a href="#contact" className={active === 'contact' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'contact')}>Contact</a>
           <Link to="/login" className="login-btn"><i className='bx bx-log-in'></i> Login</Link>
         </div>

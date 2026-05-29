@@ -6,7 +6,6 @@ import About from './components/About';
 import Franchise from './components/Franchise';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Store from './components/Store';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './components/admin/AdminDashboard';
@@ -45,7 +44,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/store" element={<Store />} />
         <Route path="/login" element={<Login />} />
         
         {/* Admin Routes */}
