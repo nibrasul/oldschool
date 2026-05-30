@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getApiBaseUrl } from '../utils/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,8 @@ const Contact = () => {
     setStatus('Submitting...');
     
     try {
-      const response = await fetch('https://oldschool-3.onrender.com/api/contact', {
+      const baseUrl = getApiBaseUrl();
+      const response = await fetch(`${baseUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

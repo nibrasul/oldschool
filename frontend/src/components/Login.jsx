@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { getApiBaseUrl } from '../utils/api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,8 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('https://oldschool-3.onrender.com/api/auth/login', {
+      const baseUrl = getApiBaseUrl();
+      const response = await fetch(`${baseUrl}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

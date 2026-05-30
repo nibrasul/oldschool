@@ -13,7 +13,7 @@ const Navbar = () => {
 
       // Active link logic (only if on home page)
       if (location.pathname === '/') {
-        const sections = ['home', 'about', 'franchise', 'contact'];
+        const sections = ['home', 'about', 'menu', 'contact'];
         let current = 'home';
         sections.forEach(sectionId => {
           const section = document.getElementById(sectionId);
@@ -63,7 +63,7 @@ const Navbar = () => {
         <div className="nav-links">
           <a href="#home" className={active === 'home' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'home')}>Home</a>
           <a href="#about" className={active === 'about' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'about')}>About</a>
-          <a href="#franchise" className={active === 'franchise' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'franchise')}>Franchise</a>
+          <a href="#menu" className={active === 'menu' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'menu')}>Menu</a>
           <a href="#contact" className={active === 'contact' && location.pathname === '/' ? 'active' : ''} onClick={(e) => scrollTo(e, 'contact')}>Contact</a>
           <Link to="/login" className="login-btn"><i className='bx bx-log-in'></i> Login</Link>
         </div>

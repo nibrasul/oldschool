@@ -3,19 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Franchise from './components/Franchise';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminDashboard from './components/admin/AdminDashboard';
+import Menu from './components/Menu';
 
 const Home = () => (
   <>
     <Navbar />
     <Hero />
     <About />
-    <Franchise />
+    <Menu />
     <Contact />
     <Footer />
   </>
@@ -45,7 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        
+
         {/* Admin Routes */}
         <Route path="/admin" element={
           <ProtectedRoute>
@@ -53,10 +53,10 @@ function App() {
           </ProtectedRoute>
         } />
       </Routes>
-      
+
       {/* WhatsApp Floating Button */}
       <a href="#" className="whatsapp-float">
-          <i className='bx bxl-whatsapp'></i>
+        <i className='bx bxl-whatsapp'></i>
       </a>
     </Router>
   );
