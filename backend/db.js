@@ -22,6 +22,9 @@ if (connectionString) {
   if (connectionString.startsWith('DATABASE_URL=')) {
     connectionString = connectionString.substring('DATABASE_URL='.length).trim().replace(/^["']|["']$/g, '');
   }
+  
+  // Explicitly override the environment variable so the internal pg library uses the cleaned version
+  process.env.DATABASE_URL = connectionString;
 }
 
 if (!connectionString) {
