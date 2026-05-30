@@ -219,3 +219,5 @@ if (!process.env.VERCEL) {
 
 export default app;
 
+// Trigger database reload with updated credentials
+

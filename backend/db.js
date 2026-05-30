@@ -12,7 +12,17 @@ dotenv.config({ path: join(__dirname, '.env') });
 
 const { Pool } = pg;
 
-const connectionString = process.env.DATABASE_URL;
+let connectionString = process.env.DATABASE_URL;
+
+if (connectionString) {
+  // Trim and strip wrapping quotes
+  connectionString = connectionString.trim().replace(/^["']|["']$/g, '');
+  
+  // Strip duplicate 'DATABASE_URL=' prefix if accidentally set inside the value
+  if (connectionString.startsWith('DATABASE_URL=')) {
+    connectionString = connectionString.substring('DATABASE_URL='.length).trim().replace(/^["']|["']$/g, '');
+  }
+}
 
 if (!connectionString) {
   console.warn('\n⚠️ WARNING: DATABASE_URL is not defined! Please define your Neon connection string in backend/.env for local testing.\n');
